@@ -36,7 +36,8 @@ let benefits = [
             </a>
         </div>
         <div class="relative shadow-2xl grid place-items-center"> 
-            <img src={"images/profile.jpg"} alt="Profile image" class="object-cover z-[2] max-h-[70vh]"/>
+            <img src={"images/profile.png"} alt="Profile image" 
+            class="object-cover z-[2] md:max-h-[80vh] rounded-[1.7rem] max-h-[60vh]"/>
         </div>
     </section>
 
@@ -58,13 +59,20 @@ let benefits = [
         </a>
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-10">
             <Step step={steps[0]}>
-                <p>Hotels app is</p>
+                <p class="mt-3">
+                    Embark on a journey of <strong class="text-violet-400">seamless</strong> 
+                    travel planning with our bespoke <strong class="text-violet-400">Booking App</strong>.<br/>
+                    From luxurious getaways to budget-friendly stays, 
+                    we craft <strong class="text-violet-400"> solutions </strong>for every traveler.
+                </p>
             </Step>
             <Step step={steps[1]}>
                 <p>Hotels app is</p>
             </Step>
             <Step step={steps[2]}>
-                <p>Hotels app <strong class="text-violet-400">is</strong></p>
+                <p class="mt-3">Immerse yourself in a <strong class="text-violet-400">seamless</strong> 
+                    browsing experience powered by <b>Advanced search algorithms.</b><br/>
+                    <strong class="text-violet-400">Discover</strong> your signature scent today!" </p>
             </Step>
 
         </div>
