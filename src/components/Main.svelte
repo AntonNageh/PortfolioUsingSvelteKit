@@ -2,15 +2,17 @@
 import Step from '../components/Step.svelte';
 
 let steps = [
-    {name:'Hotels Reservation App', icon: 'fa-solid fa-cart-shopping', href:'#bla1'},
-    {name:'Graduation Project', icon: 'fa-solid fa-list-check'  ,href:'#bla2'},
-    {name:'Perfumes App', icon: 'fa-solid fa-diagram-project',  href:'#bla3'},
+    {name:'Perfumes App', icon: 'fa-solid fa-heart',  href:'https://perfumesapp.vercel.app'},
+    {name:'Graduation Project', icon: 'fa-solid fa-user-astronaut'  ,href:'https://iaetsatellite.vercel.app/'},
+    {name:'Books App Store', icon: 'fa-solid fa-basket-shopping',  href:'https://anton-mybookstore.vercel.app/'},
+    {name:'Recent Portfolio (Slower)', icon: 'fa-solid fa-user',  href:'https://portfoliootemplate.vercel.app/'},
+    {name:'Hotels Reservation App', icon: 'fa-solid fa-hotel', href:'#bla1'},
 ]
 
 let benefits = [
-    {name:"a self taught developer", description:"Bla1"},
-    {name:"a product design and UX finatic", description:"Bla2"},
-    {name:"an excellent communicator", description:"Bla3"},
+    {name:"a self taught developer", description:"As a self-taught developer, I bring a relentless commitment to mastering my craft. I am dedicated to crafting innovative solutions and constantly enhancing my technical prowess to conquer even the most intricate challenges."},
+    {name:"a product design and UX finatic", description:"My passion for product design and obsession with user experience drive me to create exceptional, user-centric solutions. I'm dedicated to crafting designs that not only captivate but also seamlessly engage your audience."},
+    {name:"an excellent communicator", description:"Communication is at the heart of success. I possess the art of conveying complex ideas with eloquence and precision. Your vision will not only be understood but articulated effectively, ensuring the seamless realization of your projects. Let's embark on a journey of innovation and excellence together."},
 ]
 </script>
 
@@ -27,7 +29,7 @@ let benefits = [
             </p>
             <a class="blueShadow mx-auto lg:mr-auto lg:ml-0 text-base sm:text-lg md:text-xl
             poppins relative overflow-hidden px-6 py-3 group rounded-full bg-white text-slate-950 cursor-pointer" 
-            href="#"
+            href="https://www.linkedin.com/in/anton-nageh-772852169"
             target="_blank"
             >
                 <div class="absolute top-0 right-full w-full h-full bg-violet-400 opacity-20
@@ -36,6 +38,7 @@ let benefits = [
             </a>
         </div>
         <div class="relative shadow-2xl grid place-items-center"> 
+            <!-- svelte-ignore a11y-img-redundant-alt -->
             <img src={"images/profile.png"} alt="Profile image" 
             class="object-cover z-[2] md:max-h-[80vh] rounded-[1.7rem] max-h-[60vh]"/>
         </div>
@@ -57,7 +60,7 @@ let benefits = [
             <i class="fa-regular fa-circle-play"/>
             <p>My CV</p>
         </a>
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-10">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-10 lg:gap-y-16">
             <Step step={steps[0]}>
                 <p class="mt-3">
                     Embark on a journey of <strong class="text-violet-400">seamless</strong> 
@@ -67,12 +70,25 @@ let benefits = [
                 </p>
             </Step>
             <Step step={steps[1]}>
-                <p>Hotels app is</p>
+                <p class="mt-3"> Imagine a world where you can <strong class="text-violet-400">explore</strong> distant planets, <br/>
+                    their secrets unveiled by a <strong class="text-violet-400">Satellite</strong> and <strong class="text-violet-400">Rover</strong>. <br/>
+                    My graduation project takes you to the <strong class="text-violet-400">stars</strong>.
+                </p>
             </Step>
             <Step step={steps[2]}>
+                <p class="mt-3">The magic of reading is at your <strong class="text-violet-400">fingertips</strong>.<br/>
+                    <strong class="text-violet-400">Immerse</strong> yourself in stories that transport you to far-off lands, <br/>
+                    Unleash your inner <strong class="text-violet-400">bookworm</strong> today! </p>
+            </Step>
+            <Step step={steps[3]}>
+                <p class="mt-3 leading-6">A React-vite built project using Tailwindcss, R3F with Splinejs, AI generated Video and GSAP.
+                </p>
+            </Step>
+            <Step step={steps[4]}>
                 <p class="mt-3">Immerse yourself in a <strong class="text-violet-400">seamless</strong> 
                     browsing experience powered by <b>Advanced search algorithms.</b><br/>
                     <strong class="text-violet-400">Discover</strong> your signature scent today!" </p>
+                    <b> <strong class="text-violet-400">Please note : </strong>This project is not yet deployed.</b>
             </Step>
 
         </div>

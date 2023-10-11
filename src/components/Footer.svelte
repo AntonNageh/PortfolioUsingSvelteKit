@@ -4,16 +4,24 @@ flex flex-col gap-4 sm:gap-8 justify-center items-center">
         Connect with me &darr;
     </p>
     <div class="flex flex-col gap-4 items-center justify-center">
-        <p><b class="pr-2">Email</b> anton_nageh20@gmail.com</p>
+        <p>
+            <b class="pr-2">Email</b>
+            <a class="text-violet-400" target="_blank" href={`mailto:anton.nageh20@gmail.com`}>
+                anton_nageh20@gmail.com <sup><span class="text-xs scale-75 pl-0.5">
+                    <i class="fa-solid fa-arrow-up-right-from-square text-xs scale-[75%]"/>
+                </span></sup>
+            </a>
+        </p>
+  
         <p><b class="pr-2">LinkedIn</b>
-            <a class="text-violet-400" target="_blank" href="#">
+            <a class="text-violet-400" target="_blank" href="https://www.linkedin.com/in/anton-nageh-772852169">
                 anton_nageh20 <sup><span class="text-xs scale-75 pl-0.5">
                     <i class="fa-solid fa-arrow-up-right-from-square text-xs scale-[75%]"/>
                 </span></sup>
             </a>
         </p>
         <p><b class="pr-2">GitHub</b>
-            <a class="text-violet-400" target="_blank" href="#">
+            <a class="text-violet-400" target="_blank" href="https://github.com/AntonNageh">
                 anton_nageh20 <sup><span class="text-xs scale-75 pl-0.5">
                     <i class="fa-solid fa-arrow-up-right-from-square text-xs scale-[75%]"/>
                 </span></sup>
