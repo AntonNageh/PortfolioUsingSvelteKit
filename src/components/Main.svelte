@@ -40,7 +40,7 @@ let benefits = [
         <div class="relative shadow-2xl grid place-items-center"> 
             <!-- svelte-ignore a11y-img-redundant-alt -->
             <img src={"images/profile.webp"} alt="Profile image" 
-            class="object-cover z-[2] md:max-h-[80vh] rounded-[1.7rem] max-h-[60vh]"/>
+            class="object-cover z-[2] md:max-h-[80vh] md:h-[80vh] h-[60vh] rounded-[1.7rem] max-h-[60vh]"/>
         </div>
     </section>
 
