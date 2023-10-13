@@ -5,6 +5,9 @@ const config = {
   kit: {
     adapter: adapter()
   },
+  paths: {
+    output: 'dist',
+  },
   preprocess: vitePreprocess()
 };
 export default config;
