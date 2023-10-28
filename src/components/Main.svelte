@@ -1,5 +1,19 @@
 <script>
 import Step from '../components/Step.svelte';
+import 'animate.css'
+let videoHidden = true;
+let showButton = true;
+const handleButton = () =>{
+    showButton = false;
+    document.getElementById("video").play();
+}
+const handleVideoEnded = () =>{
+    const Video = document.getElementById("video");
+    Video.classList.add("animate__animated", "animate__fadeOut", "--animate__duration", "2s");
+    setTimeout(()=>{
+        videoHidden = false;
+    }, 2000)
+}
 
 let steps = [
     {name:'Perfumes App', icon: 'fa-solid fa-heart',  href:'https://perfumesapp.vercel.app'},
@@ -41,8 +55,19 @@ let benefits = [
             <!-- svelte-ignore a11y-img-redundant-alt -->
             <img src={"images/profile.webp"} alt="Profile image" 
             class="object-cover z-[2] md:max-h-[80vh] md:h-[80vh] h-[60vh] rounded-[1.7rem] max-h-[60vh]"/>
+            <div class="z-50 lg:mr-3 mr-10 mb-[1em] lg:mb-[15%] fixed hidden lg:flex justify-center items-center w-[35%] right-0 lg:w-[10%] rounded-full lg:right-0 lg:h-[30%] lg:bottom-0">
+                {#if showButton}
+                <button on:click={()=>handleButton()} class="absolute z-50 text-3xl w-full h-[100%] rounded-full bg-[rgba(0,0,0,0.5)]">Play</button>
+                {/if}
+                {#if videoHidden}
+                 <video id="video" on:ended={()=>handleVideoEnded()} 
+                    class="z-[49] rounded-full" 
+                    src={"images/profile1.mp4"} ><track kind="captions"></video>
+                {/if}
+            </div>
         </div>
     </section>
+
 
 
     <section id="projects" class="py-20 lg:py-32 flex flex-col gap-24">
