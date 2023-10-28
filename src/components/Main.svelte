@@ -57,7 +57,7 @@ let benefits = [
             class="object-cover z-[2] md:max-h-[80vh] md:h-[80vh] h-[60vh] rounded-[1.7rem] max-h-[60vh]"/>
             <div class="z-50 lg:mr-3 mr-10 mb-[1em] lg:mb-[15%] fixed hidden lg:flex justify-center items-center w-[35%] right-0 lg:w-[10%] rounded-full lg:right-0 lg:h-[30%] lg:bottom-0">
                 {#if showButton}
-                <button on:click={()=>handleButton()} class="absolute z-50 text-3xl w-full h-[100%] rounded-full bg-[rgba(0,0,0,0.5)]">Play</button>
+                <button on:click={()=>handleButton()} class="absolute z-50 text-2xl w-full h-[100%] rounded-full bg-[rgba(0,0,0,0.5)]">Play</button>
                 {/if}
                 {#if videoHidden}
                  <video id="video" on:ended={()=>handleVideoEnded()} 
