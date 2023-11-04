@@ -7,22 +7,28 @@ export default defineConfig({
 			registerType: 'prompt',  
 			includeAssets: ['favicon.ico', 'apple-touch-icon.png'],  
 			manifest: {  
-		name: 'Portfolio',  
-			  short_name: 'Portfolio',  
-			  description: 'Anton Nageh Portfolio',  
-			  theme_color: '#ffffff',  
-			  start_url: '/',  
-			  icons: [  
+				name: 'Portfolio',  
+				description: 'Anton Nageh Portfolio',  
+				short_name: 'Portfolio',  
+				start_url: '/',  
+				theme_color: '#ffffff',  
+		icons: [  
 		{  
-		src: 'pwa-192x192.png',  
-				  sizes: '192x192',  
-				  type: 'image/png',  
-				},  
-				{  
-		src: 'pwa-512x512.png',  
-				  sizes: '512x512',  
-				  type: 'image/png',  
-				},  
+			src: 'pwa-192x192.png',  
+			type: 'image/png',  
+			sizes: '192x192',  
+		},  
+		{  
+			src: 'pwa-512x512.png',  
+			type: 'image/png',  
+			sizes: '512x512',  
+		}, 
+		{  
+			src: 'pwa-512x512.png',  
+			type: 'image/png',  
+			purpose: 'any maskable',  
+			sizes: '512x512',  
+		},   
 			  ],  
 			},  
 		  }),  
