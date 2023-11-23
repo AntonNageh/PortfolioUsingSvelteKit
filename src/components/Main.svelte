@@ -21,6 +21,7 @@ let steps = [
     {name:'Books App Store', icon: 'fa-solid fa-basket-shopping',  href:'https://anton-mybookstore.vercel.app/'},
     {name:'Recent Portfolio (Slower)', icon: 'fa-solid fa-user',  href:'https://portfoliootemplate.vercel.app/'},
     {name:'Hotels Reservation App', icon: 'fa-solid fa-hotel', href:'#bla1'},
+    {name:'Dashboard App', icon: 'fa-solid fa-chart-line', href:'http://dashboardsync.netlify.app/'},
 ]
 
 let benefits = [
@@ -114,6 +115,12 @@ let benefits = [
                     browsing experience powered by <b>Advanced search algorithms.</b><br/>
                     <strong class="text-violet-400">Discover</strong> your signature scent today!" </p>
                     <b> <strong class="text-violet-400">Please note : </strong>This project is not yet deployed.</b>
+            </Step>
+            <Step step={steps[5]}>
+                <p class="mt-3">Embark on a <strong class="text-violet-400">journey</strong> of innovation with our cutting-edge dashboard. <br/>
+                    Immerse yourself in a world of visual delight! Tailor your <strong class="text-violet-400">dashboard</strong> to match your style with our Theme Editing feature. <br/>
+                    Experience hassle-free and secure sign-ins, sign-ups, and sign-outs with <strong class="text-violet-400">Clerk JS</strong>.
+                    Efficiently <strong class="text-violet-400">manage</strong> your product offerings and customer interactions on dedicated pages. 
             </Step>
 
         </div>
