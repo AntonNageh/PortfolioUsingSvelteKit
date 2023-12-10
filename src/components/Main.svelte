@@ -22,6 +22,7 @@ let steps = [
     {name:'Recent Portfolio (Slower)', icon: 'fa-solid fa-user',  href:'https://portfoliootemplate.vercel.app/'},
     {name:'Hotels Reservation App', icon: 'fa-solid fa-hotel', href:'#bla1'},
     {name:'Dashboard App', icon: 'fa-solid fa-chart-line', href:'http://dashboardsync.netlify.app/'},
+    {name:'3D Portfolio', icon: 'fa-solid fa-user-tie', href:'https://3dportfolioanton.netlify.app/'},
 ]
 
 let benefits = [
@@ -122,7 +123,12 @@ let benefits = [
                     Experience hassle-free and secure sign-ins, sign-ups, and sign-outs with <strong class="text-violet-400">Clerk JS</strong>.
                     Efficiently <strong class="text-violet-400">manage</strong> your product offerings and customer interactions on dedicated pages. 
             </Step>
-
+            <Step step={steps[6]}>
+                <p class="mt-3">
+                    Embark on a journey through a <strong class="text-violet-400">unique 3D experience</strong>.
+                    <strong class="text-violet-400">Explore</strong> dedicated sections providing insights into my story, projects, and ways to connect with me.
+                  <br/> Fully  <strong class="text-violet-400">Responsive</strong> and <strong class="text-violet-400">PWA Ready!</strong>
+            </Step>
         </div>
     </section>
     <section id="about" class="py-20 pt-10 lg:pt-16 lg:py-32 flex flex-col 
