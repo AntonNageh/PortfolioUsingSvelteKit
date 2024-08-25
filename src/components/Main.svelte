@@ -23,6 +23,7 @@ let steps = [
     {name:'Hotels Reservation App', icon: 'fa-solid fa-hotel', href:'#bla1'},
     {name:'Dashboard App', icon: 'fa-solid fa-chart-line', href:'http://dashboardsync.netlify.app/'},
     {name:'3D Portfolio', icon: 'fa-solid fa-user-tie', href:'https://3dportfolioanton.netlify.app/'},
+    {name:'2D Portfolio' ,icon:'fa-solid fa-user' ,href:'https://2dportfoliokaboom.netlify.app/'},
 ]
 
 let benefits = [
@@ -126,6 +127,12 @@ let benefits = [
             <Step step={steps[6]}>
                 <p class="mt-3">
                     Embark on a journey through a <strong class="text-violet-400">unique 3D experience</strong>.
+                    <strong class="text-violet-400">Explore</strong> dedicated sections providing insights into my story, projects, and ways to connect with me.
+                  <br/> Fully  <strong class="text-violet-400">Responsive</strong> and <strong class="text-violet-400">PWA Ready!</strong>
+            </Step>
+            <Step step={steps[7]}>
+                <p class="mt-3">
+                    Embark on a journey through a <strong class="text-violet-400">unique 2D experience</strong>.
                     <strong class="text-violet-400">Explore</strong> dedicated sections providing insights into my story, projects, and ways to connect with me.
                   <br/> Fully  <strong class="text-violet-400">Responsive</strong> and <strong class="text-violet-400">PWA Ready!</strong>
             </Step>
