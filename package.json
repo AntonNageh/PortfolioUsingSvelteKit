@@ -19,6 +19,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@vercel/analytics": "^1.6.1",
 		"animate.css": "^4.1.1"
 	}
 }
