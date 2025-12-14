@@ -15,8 +15,9 @@
     <div class={"fixed bottom-0 w-full duration-200 flex p-10 z-[10] " + (
     y > 0 ? "opacity-full pointer-events-auto" : "opacity-0 pointer-events-none"   
     )}>
-      <button on:click={goTop} class="ml-auto rounded-full bg-slate-900 text-violet-400 px-3 py-3 sm:px-4 hover:bg-slate-800 cursor-pointer">
-        <i class="fa-solid fa-arrow-up grid place-items-center aspect-square"/>
+      <button on:click={goTop} aria-label="Scroll to top" title="Scroll to top" class="ml-auto rounded-full bg-slate-900 text-violet-400 px-3 py-3 sm:px-4 hover:bg-slate-800 cursor-pointer">
+        <i class="fa-solid fa-arrow-up grid place-items-center aspect-square"></i>
+        <span class="sr-only">Scroll to top</span>
       </button>
     </div>
 

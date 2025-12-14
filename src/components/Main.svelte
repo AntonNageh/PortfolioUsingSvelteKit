@@ -54,7 +54,7 @@ let benefits = [
             target="_blank"
             >
                 <div class="absolute top-0 right-full w-full h-full bg-violet-400 opacity-20
-                group-hover:translate-x-full z-0 duration-200"/>
+                group-hover:translate-x-full z-0 duration-200"></div>
                 <h4 class="relative z-9">Get in Touch! &rarr;</h4>
             </a>
         </div>
@@ -89,7 +89,7 @@ let benefits = [
         <a href="/assets/CV.pdf" id="download-btn" sandbox="allow-downloads" 
         target="_blank" class="mx-auto px-4 py-2 rounded-md border border-solid border-white 
         flex items-center gap-2 -mb-4 sm:-mb-0 -mt-14 hover:border-violet-700 duration-200">
-            <i class="fa-regular fa-circle-play"/>
+            <i class="fa-regular fa-circle-play"></i>
             <p>My CV</p>
         </a>
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-10 lg:gap-y-16">
