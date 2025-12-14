@@ -1,5 +1,5 @@
 import adapter from '@sveltejs/adapter-vercel';
-import { vitePreprocess } from '@sveltejs/kit/vite';
+import sveltePreprocess from 'svelte-preprocess';
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
   kit: {
@@ -8,6 +8,6 @@ const config = {
   paths: {
     output: 'dist',
   },
-  preprocess: vitePreprocess()
+  preprocess: sveltePreprocess()
 };
 export default config;

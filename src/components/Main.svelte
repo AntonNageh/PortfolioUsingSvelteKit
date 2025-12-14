@@ -16,7 +16,7 @@ const handleVideoEnded = () =>{
 }
 
 let steps = [
-    {name:'Secred Mobile Application', icon: 'fa-solid fa-lock',  href:'#'},
+    {name:'Secred Mobile Application', icon: 'fa-solid fa-lock',  href:'https://github.com/AntonNageh/Secured-App'},
     {name:'My Movies Mobile Application', icon: 'fa-solid fa-film',  href:'https://github.com/AntonNageh/MyMovies-React-native-app'},
     {name:'Warehouse Management System', icon: 'fa-solid fa-warehouse',  href:'https://egwarehouse.vercel.app'},
     {name:'Burger App', icon: 'fa-solid fa-hamburger',  href:'https://burgerclerkapp.netlify.app'},
@@ -93,113 +93,113 @@ let benefits = [
             <p>My CV</p>
         </a>
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-10 lg:gap-y-16">
-<Step step={steps[2]}>
-  <p class="mt-3">
-    Embark on smarter logistics with our <strong class="text-violet-400">Warehouse Management System</strong>!<br/>
-    Track products from <strong class="text-violet-400">arrival</strong> to 
-    <strong class="text-violet-400">delivery</strong>, while clients monitor only their 
-    own stock and create <strong class="text-violet-400">orders</strong> with ease.<br/>
-    Handlers <strong class="text-violet-400">scan QR codes</strong> to update statuses 
-    across every stage effortlessly!
-  </p>
-</Step>
+        <Step step={steps[2]}>
+        <p class="mt-3">
+            Embark on smarter logistics with our <strong class="text-violet-400">Warehouse Management System</strong>!<br/>
+            Track products from <strong class="text-violet-400">arrival</strong> to 
+            <strong class="text-violet-400">delivery</strong>, while clients monitor only their 
+            own stock and create <strong class="text-violet-400">orders</strong> with ease.<br/>
+            Handlers <strong class="text-violet-400">scan QR codes</strong> to update statuses 
+            across every stage effortlessly!
+        </p>
+        </Step>
 
-<Step step={steps[0]}>
-  <p class="mt-5">
-    Embark on a journey of <strong class="text-violet-400">Secured Logistics</strong> 
-    with our mobile app built using <strong class="text-violet-400">React Native</strong> 
-    and <strong class="text-violet-400">Supabase</strong>!<br/><br/>
-    Companies can have their products <strong class="text-violet-400">transported</strong> from Dubai Airport 
-    straight to our <strong class="text-violet-400">Secured Warehouse</strong>
-    and create <strong class="text-violet-400">Orders</strong> that deliver safely to real clients!
-  </p>
-</Step>
+        <Step step={steps[0]}>
+        <p class="mt-5">
+            Embark on a journey of <strong class="text-violet-400">Secured Logistics</strong> 
+            with our mobile app built using <strong class="text-violet-400">React Native</strong> 
+            and <strong class="text-violet-400">Supabase</strong>!<br/><br/>
+            Companies can have their products <strong class="text-violet-400">transported</strong> from Dubai Airport 
+            straight to our <strong class="text-violet-400">Secured Warehouse</strong>
+            and create <strong class="text-violet-400">Orders</strong> that deliver safely to real clients!
+        </p>
+        </Step>
 
-<Step step={steps[9]}>
-  <p class="mt-3">
-    Embark on a <strong class="text-violet-400">journey</strong> of innovation with our cutting-edge dashboard. <br/>
-    Immerse yourself in a world of visual delight! Tailor your <strong class="text-violet-400">dashboard</strong> to match your style with our Theme Editing feature. <br/>
-    Experience hassle-free and secure sign-ins, sign-ups, and sign-outs with <strong class="text-violet-400">Clerk JS</strong>.
-    Efficiently <strong class="text-violet-400">manage</strong> your product offerings and customer interactions on dedicated pages. 
-  </p>
-</Step>
+        <Step step={steps[9]}>
+        <p class="mt-3">
+            Embark on a <strong class="text-violet-400">journey</strong> of innovation with our cutting-edge dashboard. <br/>
+            Immerse yourself in a world of visual delight! Tailor your <strong class="text-violet-400">dashboard</strong> to match your style with our Theme Editing feature. <br/>
+            Experience hassle-free and secure sign-ins, sign-ups, and sign-outs with <strong class="text-violet-400">Clerk JS</strong>.
+            Efficiently <strong class="text-violet-400">manage</strong> your product offerings and customer interactions on dedicated pages. 
+        </p>
+        </Step>
 
-<Step step={steps[1]}>
-  <p class="mt-3">
-    Embark on a <strong class="text-violet-400">cinematic journey</strong> with our 
-    immersive <strong class="text-violet-400">Movies App</strong>!<br/>
-    Discover trending <strong class="text-violet-400">films</strong>, explore detailed 
-    <strong class="text-violet-400">movie info</strong>, and enjoy a seamless browsing 
-    experience that brings the magic of cinema to your fingertips!
-  </p>
-</Step>
+        <Step step={steps[1]}>
+        <p class="mt-3">
+            Embark on a <strong class="text-violet-400">cinematic journey</strong> with our 
+            immersive <strong class="text-violet-400">Movies App</strong>!<br/>
+            Discover trending <strong class="text-violet-400">films</strong>, explore detailed 
+            <strong class="text-violet-400">movie info</strong>, and enjoy a seamless browsing 
+            experience that brings the magic of cinema to your fingertips!
+        </p>
+        </Step>
 
-<Step step={steps[3]}>
-  <p class="mt-8">
-    Discover a world of <strong class="text-violet-400">flavor</strong> with our interactive 
-    <strong class="text-violet-400">Burger App</strong>!<br/>
-    Immerse yourself in a menu of <strong class="text-violet-400">diverse sandwiches</strong>, 
-    add them to your <strong class="text-violet-400">cart</strong> with a demo payment, 
-    or unleash your creativity by <strong class="text-violet-400">customizing</strong> 
-    every detail to craft your own masterpiece!
-  </p>
-</Step>
+        <Step step={steps[3]}>
+        <p class="mt-8">
+            Discover a world of <strong class="text-violet-400">flavor</strong> with our interactive 
+            <strong class="text-violet-400">Burger App</strong>!<br/>
+            Immerse yourself in a menu of <strong class="text-violet-400">diverse sandwiches</strong>, 
+            add them to your <strong class="text-violet-400">cart</strong> with a demo payment, 
+            or unleash your creativity by <strong class="text-violet-400">customizing</strong> 
+            every detail to craft your own masterpiece!
+        </p>
+        </Step>
 
-<Step step={steps[4]}>
-  <p class="mt-3">
-    Immerse yourself in a <strong class="text-violet-400">seamless</strong> 
-    browsing experience powered by <b>Advanced search algorithms.</b><br/>
-    <strong class="text-violet-400">Discover</strong> your signature scent today!
-  </p>
-</Step>
+        <Step step={steps[4]}>
+        <p class="mt-3">
+            Immerse yourself in a <strong class="text-violet-400">seamless</strong> 
+            browsing experience powered by <b>Advanced search algorithms.</b><br/>
+            <strong class="text-violet-400">Discover</strong> your signature scent today!
+        </p>
+        </Step>
 
-<Step step={steps[8]}>
-  <p class="mt-3">
-    Embark on a journey of <strong class="text-violet-400">seamless</strong> 
-    travel planning with our bespoke <strong class="text-violet-400">Booking App</strong>.<br/>
-    From luxurious getaways to budget-friendly stays, 
-    we craft <strong class="text-violet-400">solutions</strong> for every traveler.<br/>
-    <b><strong class="text-violet-400">Please note:</strong> This project is not yet deployed.</b>
-  </p>
-</Step>
+        <Step step={steps[8]}>
+        <p class="mt-3">
+            Embark on a journey of <strong class="text-violet-400">seamless</strong> 
+            travel planning with our bespoke <strong class="text-violet-400">Booking App</strong>.<br/>
+            From luxurious getaways to budget-friendly stays, 
+            we craft <strong class="text-violet-400">solutions</strong> for every traveler.<br/>
+            <b><strong class="text-violet-400">Please note:</strong> This project is not yet deployed.</b>
+        </p>
+        </Step>
 
-<Step step={steps[10]}>
-  <p class="mt-3">
-    Embark on a journey through a <strong class="text-violet-400">unique 3D experience</strong>.
-    <strong class="text-violet-400">Explore</strong> dedicated sections providing insights into my story, projects, and ways to connect with me.<br/>
-    Fully <strong class="text-violet-400">Responsive</strong> and <strong class="text-violet-400">PWA Ready!</strong>
-  </p>
-</Step>
+        <Step step={steps[10]}>
+        <p class="mt-3">
+            Embark on a journey through a <strong class="text-violet-400">unique 3D experience</strong>.
+            <strong class="text-violet-400">Explore</strong> dedicated sections providing insights into my story, projects, and ways to connect with me.<br/>
+            Fully <strong class="text-violet-400">Responsive</strong> and <strong class="text-violet-400">PWA Ready!</strong>
+        </p>
+        </Step>
 
-<Step step={steps[11]}>
-  <p class="mt-3">
-    Embark on a journey through a <strong class="text-violet-400">unique 2D experience</strong>.
-    <strong class="text-violet-400">Explore</strong> dedicated sections providing insights into my story, projects, and ways to connect with me.<br/>
-    Fully <strong class="text-violet-400">Responsive</strong> and <strong class="text-violet-400">PWA Ready!</strong>
-  </p>
-</Step>
+        <Step step={steps[11]}>
+        <p class="mt-3">
+            Embark on a journey through a <strong class="text-violet-400">unique 2D experience</strong>.
+            <strong class="text-violet-400">Explore</strong> dedicated sections providing insights into my story, projects, and ways to connect with me.<br/>
+            Fully <strong class="text-violet-400">Responsive</strong> and <strong class="text-violet-400">PWA Ready!</strong>
+        </p>
+        </Step>
 
-<Step step={steps[6]}>
-  <p class="mt-3">
-    The magic of reading is at your <strong class="text-violet-400">fingertips</strong>.<br/>
-    <strong class="text-violet-400">Immerse</strong> yourself in stories that transport you to far-off lands, <br/>
-    Unleash your inner <strong class="text-violet-400">bookworm</strong> today!
-  </p>
-</Step>
+        <Step step={steps[6]}>
+        <p class="mt-3">
+            The magic of reading is at your <strong class="text-violet-400">fingertips</strong>.<br/>
+            <strong class="text-violet-400">Immerse</strong> yourself in stories that transport you to far-off lands, <br/>
+            Unleash your inner <strong class="text-violet-400">bookworm</strong> today!
+        </p>
+        </Step>
 
-<Step step={steps[5]}>
-  <p class="mt-3">
-    Imagine a world where you can <strong class="text-violet-400">explore</strong> distant planets, <br/>
-    their secrets unveiled by a <strong class="text-violet-400">Satellite</strong> and <strong class="text-violet-400">Rover</strong>. <br/>
-    My graduation project takes you to the <strong class="text-violet-400">stars</strong>.
-  </p>
-</Step>
+        <Step step={steps[5]}>
+        <p class="mt-3">
+            Imagine a world where you can <strong class="text-violet-400">explore</strong> distant planets, <br/>
+            their secrets unveiled by a <strong class="text-violet-400">Satellite</strong> and <strong class="text-violet-400">Rover</strong>. <br/>
+            My graduation project takes you to the <strong class="text-violet-400">stars</strong>.
+        </p>
+        </Step>
 
-<Step step={steps[7]}>
-  <p class="mt-3 leading-6">
-    A React-vite built project using Tailwindcss, R3F with Splinejs, AI generated Video and GSAP.
-  </p>
-</Step>
+        <Step step={steps[7]}>
+        <p class="mt-3 leading-6">
+            A React-vite built project using Tailwindcss, R3F with Splinejs, AI generated Video and GSAP.
+        </p>
+        </Step>
 
         </div>
     </section>
