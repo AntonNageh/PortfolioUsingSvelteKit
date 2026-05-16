@@ -1,230 +1,521 @@
 <script>
-import Step from '../components/Step.svelte';
-import 'animate.css'
-let videoHidden = true;
-let showButton = true;
-const handleButton = () =>{
-    showButton = false;
-    document.getElementById("video").play();
-}
-const handleVideoEnded = () =>{
-    const Video = document.getElementById("video");
-    Video.classList.add("animate__animated", "animate__fadeOut", "--animate__duration", "2s");
-    setTimeout(()=>{
-        videoHidden = false;
-    }, 2000)
-}
+    import Step from './Step.svelte';
+    import { onMount } from 'svelte';
+    import gsap from 'gsap';
+    import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+    
+    let scrollY = 0;
+    let heroRef;
+    let profileRef;
+    let textRef;
+    let skillsRef;
+    let pinnedSectionRef;
+    
+    // Only standout projects - no duplicates
+    let projects = [
+        { 
+            name: 'Warehouse Management System', 
+            icon: 'fa-solid fa-warehouse', 
+            href: 'https://egwarehouse.vercel.app',
+            description: 'Full-stack logistics platform with QR code tracking, real-time inventory management, and role-based access control. Built with modern web technologies.',
+            tags: ['React', 'Node.js', 'PostgreSQL', 'QR Tracking']
+        },
+        { 
+            name: 'Dashboard Analytics Platform', 
+            icon: 'fa-solid fa-chart-line', 
+            href: 'http://dashboardsync.netlify.app/',
+            description: 'Enterprise dashboard with theme customization, real-time data visualization, and secure authentication using Clerk JS.',
+            tags: ['React', 'Clerk', 'Charts', 'Tailwind']
+        },
+        { 
+            name: 'Secured Mobile App', 
+            icon: 'fa-solid fa-shield-halved', 
+            href: 'https://github.com/AntonNageh/Secured-App',
+            description: 'Cross-platform mobile application for secure logistics management with real-time tracking and order processing.',
+            tags: ['React Native', 'Supabase', 'Mobile']
+        },
+        { 
+            name: '3D Interactive Portfolio', 
+            icon: 'fa-solid fa-cube', 
+            href: 'https://3dportfolioanton.netlify.app/',
+            description: 'Immersive 3D portfolio experience built with React Three Fiber, featuring interactive 3D models and smooth animations.',
+            tags: ['React', 'Three.js', 'R3F', 'GSAP']
+        },
+        { 
+            name: 'Movies Discovery App', 
+            icon: 'fa-solid fa-film', 
+            href: 'https://github.com/AntonNageh/MyMovies-React-native-app',
+            description: 'Mobile app for discovering trending films with detailed information, built with React Native and modern UI patterns.',
+            tags: ['React Native', 'API', 'Mobile UI']
+        },
+        { 
+            name: 'Satellite Tracking System', 
+            icon: 'fa-solid fa-satellite', 
+            href: 'https://iaetsatellite.vercel.app/',
+            description: 'Graduation project: Interactive platform for exploring planetary data through satellite and rover simulations.',
+            tags: ['React', 'WebGL', 'Data Viz']
+        }
+    ];
 
-let steps = [
-    {name:'Secred Mobile Application', icon: 'fa-solid fa-lock',  href:'https://github.com/AntonNageh/Secured-App'},
-    {name:'My Movies Mobile Application', icon: 'fa-solid fa-film',  href:'https://github.com/AntonNageh/MyMovies-React-native-app'},
-    {name:'Warehouse Management System', icon: 'fa-solid fa-warehouse',  href:'https://egwarehouse.vercel.app'},
-    {name:'Burger App', icon: 'fa-solid fa-hamburger',  href:'https://burgerclerkapp.netlify.app'},
-    {name:'Perfumes App', icon: 'fa-solid fa-heart',  href:'https://perfumesapp.vercel.app'},
-    {name:'Graduation Project', icon: 'fa-solid fa-user-astronaut'  ,href:'https://iaetsatellite.vercel.app/'},
-    {name:'Books App Store', icon: 'fa-solid fa-basket-shopping',  href:'https://anton-mybookstore.vercel.app/'},
-    {name:'Recent Portfolio (Slower)', icon: 'fa-solid fa-user',  href:'https://portfoliootemplate.vercel.app/'},
-    {name:'Hotels Reservation App', icon: 'fa-solid fa-hotel', href:'#bla1'},
-    {name:'Dashboard App', icon: 'fa-solid fa-chart-line', href:'http://dashboardsync.netlify.app/'},
-    {name:'3D Portfolio', icon: 'fa-solid fa-user-tie', href:'https://3dportfolioanton.netlify.app/'},
-    {name:'2D Portfolio' ,icon:'fa-solid fa-user' ,href:'https://2dportfoliokaboom.netlify.app/'},
-]
+    let skills = [
+        { name: 'React', icon: 'fa-brands fa-react' },
+        { name: 'SvelteKit', icon: 'fa-solid fa-bolt' },
+        { name: 'TypeScript', icon: 'fa-brands fa-js' },
+        { name: 'Tailwind CSS', icon: 'fa-solid fa-wind' },
+        { name: 'React Native', icon: 'fa-brands fa-react' },
+        { name: 'Three.js', icon: 'fa-solid fa-cube' },
+        { name: 'Node.js', icon: 'fa-brands fa-node' },
+        { name: 'PostgreSQL', icon: 'fa-solid fa-database' }
+    ];
 
-let benefits = [
-    {name:"a self taught developer", description:"As a self-taught developer, I bring a relentless commitment to mastering my craft. I am dedicated to crafting innovative solutions and constantly enhancing my technical prowess to conquer even the most intricate challenges."},
-    {name:"a product design and UX finatic", description:"My passion for product design and obsession with user experience drive me to create exceptional, user-centric solutions. I'm dedicated to crafting designs that not only captivate but also seamlessly engage your audience."},
-    {name:"an excellent communicator", description:"Communication is at the heart of success. I possess the art of conveying complex ideas with eloquence and precision. Your vision will not only be understood but articulated effectively, ensuring the seamless realization of your projects. Let's embark on a journey of innovation and excellence together."},
-]
+    // Pinned section content
+    let pinnedSlides = [
+        {
+            title: "Building Modern Web Apps",
+            description: "I specialize in creating fast, responsive, and accessible web applications using the latest technologies and best practices.",
+            icon: "fa-solid fa-rocket",
+            color: "from-violet-600 to-purple-600"
+        },
+        {
+            title: "Performance Matters",
+            description: "Every millisecond counts. I optimize for speed, ensuring your users get the best experience possible with lazy loading, code splitting, and efficient rendering.",
+            icon: "fa-solid fa-gauge-high",
+            color: "from-purple-600 to-pink-600"
+        },
+        {
+            title: "Design & User Experience",
+            description: "Beautiful interfaces that users love. I combine aesthetics with functionality to create intuitive, engaging experiences.",
+            icon: "fa-solid fa-palette",
+            color: "from-pink-600 to-rose-600"
+        },
+        {
+            title: "Clean, Maintainable Code",
+            description: "Writing code that's easy to understand and maintain. Following best practices, design patterns, and keeping things simple.",
+            icon: "fa-solid fa-code",
+            color: "from-blue-600 to-cyan-600"
+        }
+    ];
+
+    onMount(() => {
+        // Register GSAP plugins
+        if (typeof window !== 'undefined') {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Hero entrance animations
+            const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+            
+            tl.from(textRef.querySelectorAll('.animate-text'), {
+                y: 60,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.2
+            });
+
+            tl.from(profileRef, {
+                scale: 0.8,
+                opacity: 0,
+                duration: 1,
+                ease: 'back.out(1.7)'
+            }, '-=0.5');
+
+            // Profile image parallax on scroll
+            gsap.to(profileRef, {
+                y: -80,
+                scrollTrigger: {
+                    trigger: heroRef,
+                    start: 'top top',
+                    end: 'bottom top',
+                    scrub: 1
+                }
+            });
+
+            // Text fade out on scroll (parallax effect)
+            gsap.to(textRef, {
+                opacity: 0.3,
+                y: 100,
+                scrollTrigger: {
+                    trigger: heroRef,
+                    start: 'top top',
+                    end: 'bottom top',
+                    scrub: 1
+                }
+            });
+
+            // Skills cards animation - FIX: Make them visible
+            const skillCards = gsap.utils.toArray('.skill-card');
+            skillCards.forEach((card, i) => {
+                gsap.fromTo(card, 
+                    {
+                        opacity: 0,
+                        y: 50,
+                        scale: 0.8
+                    },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        scale: 1,
+                        duration: 0.6,
+                        delay: i * 0.08,
+                        ease: 'back.out(1.7)',
+                        scrollTrigger: {
+                            trigger: skillsRef,
+                            start: 'top 70%',
+                            toggleActions: 'play none none none'
+                        }
+                    }
+                );
+            });
+
+            // PINNED SCROLL SECTION - The effect you want!
+            const slides = gsap.utils.toArray('.pinned-slide');
+            
+            // Create a timeline for the pinned section with more scroll space
+            const pinnedTimeline = gsap.timeline({
+                scrollTrigger: {
+                    trigger: pinnedSectionRef,
+                    start: 'top top',
+                    end: () => `+=${window.innerHeight * (slides.length + 1)}`, // Extra space for last slide
+                    pin: true,
+                    scrub: 1,
+                    anticipatePin: 1,
+                    pinSpacing: true
+                }
+            });
+
+            // Animate each slide in sequence
+            slides.forEach((slide, i) => {
+                if (i === 0) {
+                    // First slide starts visible
+                    pinnedTimeline.fromTo(slide,
+                        { opacity: 1, scale: 1, zIndex: slides.length - i },
+                        { opacity: 0, scale: 0.8, zIndex: slides.length - i, duration: 1 },
+                        0
+                    );
+                } else {
+                    // Subsequent slides fade in
+                    pinnedTimeline.fromTo(slide,
+                        { opacity: 0, scale: 1.2, zIndex: slides.length - i },
+                        { opacity: 1, scale: 1, zIndex: slides.length - i, duration: 0.5 },
+                        i - 0.5
+                    );
+                    
+                    // Then fade out (except last slide)
+                    if (i < slides.length - 1) {
+                        pinnedTimeline.to(slide,
+                            { opacity: 0, scale: 0.8, duration: 0.5 },
+                            i + 0.5
+                        );
+                    } else {
+                        // Last slide stays visible longer
+                        pinnedTimeline.to(slide,
+                            { opacity: 1, scale: 1, duration: 0.5 },
+                            i + 0.5
+                        );
+                    }
+                }
+            });
+
+            // Section titles parallax
+            gsap.utils.toArray('.section-title').forEach(title => {
+                gsap.from(title, {
+                    scrollTrigger: {
+                        trigger: title,
+                        start: 'top 80%',
+                        end: 'top 30%',
+                        scrub: 1
+                    },
+                    y: 50,
+                    opacity: 0
+                });
+            });
+
+            // Projects parallax
+            gsap.utils.toArray('.project-card').forEach((card, i) => {
+                gsap.from(card, {
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 85%',
+                        end: 'top 50%',
+                        scrub: 1
+                    },
+                    y: 100,
+                    opacity: 0,
+                    rotation: i % 2 === 0 ? -5 : 5
+                });
+            });
+
+            // About cards parallax
+            gsap.utils.toArray('.about-card').forEach((card, i) => {
+                gsap.from(card, {
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 85%',
+                        end: 'top 50%',
+                        scrub: 1
+                    },
+                    y: 80,
+                    opacity: 0,
+                    x: i % 2 === 0 ? -50 : 50
+                });
+            });
+        }
+    });
 </script>
 
-<main class="flex flex-col flex-1 p-4">
-    <section id="introPage" class="grid grid-cols-1 lg:grid-cols-2 gap-10 py-8 sm:py-14">
-        <div class="flex flex-col lg:justify-center text-center lg:text-left gap-6 md:gap-8 lg:gap-10">
-            <h2 class="font-semibold text-4xl sm:text-5xl md:text-6xl">
-                Hi! <br/> I'm <span class="poppins text-violet-400">Anton</span> Nageh<br/>
-                Front-end <span class="poppins text-violet-400">developer.</span>
-            </h2>
-            <p class="text-base sm:text-lg md:text-xl">
-                My <span class="text-violet-400">favorite tech</span> includes Javascript 
-                (React/vite.js or SvelteKit), Tailwindcss, Bootstrap, Material UI, R3F (React Three Fiber);
-            </p>
-            <a class="blueShadow mx-auto lg:mr-auto lg:ml-0 text-base sm:text-lg md:text-xl
-            poppins relative overflow-hidden px-6 py-3 group rounded-full bg-white text-slate-950 cursor-pointer" 
-            href="https://www.linkedin.com/in/anton-nageh-772852169"
-            target="_blank"
-            >
-                <div class="absolute top-0 right-full w-full h-full bg-violet-400 opacity-20
-                group-hover:translate-x-full z-0 duration-200"></div>
-                <h4 class="relative z-9">Get in Touch! &rarr;</h4>
-            </a>
-        </div>
-        <div class="relative shadow-2xl grid place-items-center"> 
-            <!-- svelte-ignore a11y-img-redundant-alt -->
-            <img src={"images/profile.png"} alt="Profile image"
-            class="object-cover z-[2] md:max-h-[80vh] md:h-[80vh] h-[60vh] rounded-[5rem] max-h-[60vh]"/>
-            <div class="z-50 lg:mr-3 mr-10 mb-[1em] lg:mb-[15%] fixed hidden lg:flex justify-center items-center w-[35%] right-0 lg:w-[10%] rounded-full lg:right-0 lg:h-[30%] lg:bottom-0">
-                {#if showButton}
-                <button on:click={()=>handleButton()} class="absolute z-50 text-2xl w-full h-[10vw] rounded-full bg-[rgba(0,0,0,0.5)]">Play</button>
-                {/if}
-                {#if videoHidden}
-                 <video id="video" on:ended={()=>handleVideoEnded()} 
-                    class="z-[49] rounded-full" 
-                    src={"images/profile1.mp4"} ><track kind="captions"></video>
-                {/if}
-            </div>
-        </div>
-    </section>
+<svelte:window bind:scrollY />
 
+<main class="flex flex-col flex-1 overflow-y-hidden">
+    <!-- Hero Section -->
+    <section 
+        bind:this={heroRef}
+        id="introPage" 
+        class="min-h-screen flex items-center justify-center px-4 md:px-8 py-20 relative overflow-hidden"
+    >
+        <div class="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+            <!-- Text Content -->
+            <div bind:this={textRef} class="flex flex-col gap-8 text-center scale-[80%] md:-mt-20 lg:text-left">
+                <div class="animate-text inline-flex items-center gap-2 px-4 py-2 glass rounded-full w-fit mx-auto lg:mx-0">
+                    <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                    <span class="text-sm">Available for Freelance</span>
+                </div>
 
+                <h1 class="animate-text text-nowrap font-bold text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-tight">
+                    Hi, <br/> I'm <span class="gradient-text">Anton Nageh</span>
+                </h1>
 
-    <section id="projects" class="py-20 lg:py-32 flex flex-col gap-24">
-        <div class="flex flex-col gap-2 text-center">
-            <h6 class="text-lg sm:text-xl md:text-2xl">
-                A few of my creatives endeavors.
-            </h6>
-            <h3 class="font-semibold text-3xl sm:text-4xl md:text-5xl">
-                Curious to <span class="poppins text-violet-400">see</span> my work?
-            </h3>
-        </div>
-        <a href="/assets/CV.pdf" id="download-btn" sandbox="allow-downloads" 
-        target="_blank" class="mx-auto px-4 py-2 rounded-md border border-solid border-white 
-        flex items-center gap-2 -mb-4 sm:-mb-0 -mt-14 hover:border-violet-700 duration-200">
-            <i class="fa-regular fa-circle-play"></i>
-            <p>My CV</p>
-        </a>
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-10 lg:gap-y-16">
-        <Step step={steps[2]}>
-        <p class="mt-3">
-            Embark on smarter logistics with our <strong class="text-violet-400">Warehouse Management System</strong>!<br/>
-            Track products from <strong class="text-violet-400">arrival</strong> to 
-            <strong class="text-violet-400">delivery</strong>, while clients monitor only their 
-            own stock and create <strong class="text-violet-400">orders</strong> with ease.<br/>
-            Handlers <strong class="text-violet-400">scan QR codes</strong> to update statuses 
-            across every stage effortlessly!
-        </p>
-        </Step>
+                <p class="animate-text text-xl md:text-2xl lg:text-3xl text-gray-300 font-medium">
+                    Front-end Developer specializing in React, SvelteKit, and modern web technologies.
+                </p>
 
-        <Step step={steps[0]}>
-        <p class="mt-5">
-            Embark on a journey of <strong class="text-violet-400">Secured Logistics</strong> 
-            with our mobile app built using <strong class="text-violet-400">React Native</strong> 
-            and <strong class="text-violet-400">Supabase</strong>!<br/><br/>
-            Companies can have their products <strong class="text-violet-400">transported</strong> from Dubai Airport 
-            straight to our <strong class="text-violet-400">Secured Warehouse</strong>
-            and create <strong class="text-violet-400">Orders</strong> that deliver safely to real clients!
-        </p>
-        </Step>
+                <p class="animate-text text-lg md:text-xl text-gray-400 leading-relaxed">
+                    I build performant, accessible web applications with clean code and attention to detail. 
+                    Passionate about creating seamless user experiences.
+                </p>
 
-        <Step step={steps[9]}>
-        <p class="mt-3">
-            Embark on a <strong class="text-violet-400">journey</strong> of innovation with our cutting-edge dashboard. <br/>
-            Immerse yourself in a world of visual delight! Tailor your <strong class="text-violet-400">dashboard</strong> to match your style with our Theme Editing feature. <br/>
-            Experience hassle-free and secure sign-ins, sign-ups, and sign-outs with <strong class="text-violet-400">Clerk JS</strong>.
-            Efficiently <strong class="text-violet-400">manage</strong> your product offerings and customer interactions on dedicated pages. 
-        </p>
-        </Step>
-
-        <Step step={steps[1]}>
-        <p class="mt-3">
-            Embark on a <strong class="text-violet-400">cinematic journey</strong> with our 
-            immersive <strong class="text-violet-400">Movies App</strong>!<br/>
-            Discover trending <strong class="text-violet-400">films</strong>, explore detailed 
-            <strong class="text-violet-400">movie info</strong>, and enjoy a seamless browsing 
-            experience that brings the magic of cinema to your fingertips!
-        </p>
-        </Step>
-
-        <Step step={steps[3]}>
-        <p class="mt-8">
-            Discover a world of <strong class="text-violet-400">flavor</strong> with our interactive 
-            <strong class="text-violet-400">Burger App</strong>!<br/>
-            Immerse yourself in a menu of <strong class="text-violet-400">diverse sandwiches</strong>, 
-            add them to your <strong class="text-violet-400">cart</strong> with a demo payment, 
-            or unleash your creativity by <strong class="text-violet-400">customizing</strong> 
-            every detail to craft your own masterpiece!
-        </p>
-        </Step>
-
-        <Step step={steps[4]}>
-        <p class="mt-3">
-            Immerse yourself in a <strong class="text-violet-400">seamless</strong> 
-            browsing experience powered by <b>Advanced search algorithms.</b><br/>
-            <strong class="text-violet-400">Discover</strong> your signature scent today!
-        </p>
-        </Step>
-
-        <Step step={steps[8]}>
-        <p class="mt-3">
-            Embark on a journey of <strong class="text-violet-400">seamless</strong> 
-            travel planning with our bespoke <strong class="text-violet-400">Booking App</strong>.<br/>
-            From luxurious getaways to budget-friendly stays, 
-            we craft <strong class="text-violet-400">solutions</strong> for every traveler.<br/>
-            <b><strong class="text-violet-400">Please note:</strong> This project is not yet deployed.</b>
-        </p>
-        </Step>
-
-        <Step step={steps[10]}>
-        <p class="mt-3">
-            Embark on a journey through a <strong class="text-violet-400">unique 3D experience</strong>.
-            <strong class="text-violet-400">Explore</strong> dedicated sections providing insights into my story, projects, and ways to connect with me.<br/>
-            Fully <strong class="text-violet-400">Responsive</strong> and <strong class="text-violet-400">PWA Ready!</strong>
-        </p>
-        </Step>
-
-        <Step step={steps[11]}>
-        <p class="mt-3">
-            Embark on a journey through a <strong class="text-violet-400">unique 2D experience</strong>.
-            <strong class="text-violet-400">Explore</strong> dedicated sections providing insights into my story, projects, and ways to connect with me.<br/>
-            Fully <strong class="text-violet-400">Responsive</strong> and <strong class="text-violet-400">PWA Ready!</strong>
-        </p>
-        </Step>
-
-        <Step step={steps[6]}>
-        <p class="mt-3">
-            The magic of reading is at your <strong class="text-violet-400">fingertips</strong>.<br/>
-            <strong class="text-violet-400">Immerse</strong> yourself in stories that transport you to far-off lands, <br/>
-            Unleash your inner <strong class="text-violet-400">bookworm</strong> today!
-        </p>
-        </Step>
-
-        <Step step={steps[5]}>
-        <p class="mt-3">
-            Imagine a world where you can <strong class="text-violet-400">explore</strong> distant planets, <br/>
-            their secrets unveiled by a <strong class="text-violet-400">Satellite</strong> and <strong class="text-violet-400">Rover</strong>. <br/>
-            My graduation project takes you to the <strong class="text-violet-400">stars</strong>.
-        </p>
-        </Step>
-
-        <Step step={steps[7]}>
-        <p class="mt-3 leading-6">
-            A React-vite built project using Tailwindcss, R3F with Splinejs, AI generated Video and GSAP.
-        </p>
-        </Step>
-
-        </div>
-    </section>
-    <section id="about" class="py-20 pt-10 lg:pt-16 lg:py-32 flex flex-col 
-    gap-16 sm:gap-20 md:gap-24 relative">
-        <div class="flex flex-col gap-2 text-center relative before:absolute before:top-0 py-4
-        before:left-0 before:w-2/3 before:h-1.5 before:bg-violet-700 after:absolute after:bottom-0
-        after:right-0 after:w-2/3 after:h-1.5 after:bg-violet-700">
-        <h6 class="text-lg sm:text-xl md:text-2xl">Want to know more?</h6>
-        <h3 class="font-semibold text-3xl sm:text-4xl md:text-5xl">A bit <span class="poppins text-violet-400">about </span>me.</h3>
-        </div>
-        <p class="mx-auto poppins font-semibold text-lg sm:text-xl md:text-2xl">I am . . .</p>
-        <div class="flex flex-col mx-auto gap-20 max-w-[800px]">
-            {#each benefits as  benefit, index}
-            <div class="gap-6 sm:gap-8 flex">
-                <p class="poppins text-4xl sm:text-5xl md:text-6xl text-slate-500 
-                font-semibold">0{index+1}</p>
-                <div class="flex flex-col gap-6 sm:gap-8">
-                    <h3 class="text-2xl sm:text-3xl md:text-5xl">
-                        {benefit.name}
-                    </h3>
-                    <p>{benefit.description}</p>
+                <div class="animate-text flex flex-col sm:flex-row gap-4 mx-auto lg:mx-0">
+                    <a 
+                        href="#projects"
+                        class="px-8 py-4 btn-primary rounded-lg font-semibold cursor-pointer text-center text-lg"
+                    >
+                        View Projects
+                    </a>
+                    <a 
+                        href="/assets/CV.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="px-8 py-4 btn-secondary rounded-lg font-semibold cursor-pointer text-center text-lg"
+                    >
+                        Download CV
+                    </a>
                 </div>
             </div>
+
+            <!-- Profile Image - Enhanced -->
+            <div bind:this={profileRef} class="relative w-full scale-75 md:-mt-10 max-w-lg mx-auto">
+                <!-- Glow effects -->
+                <div class="absolute inset-0 bg-gradient-to-r from-violet-600/30 to-purple-600/30 rounded-full blur-3xl animate-pulse"></div>
+                
+                <!-- Main container -->
+                <div class="relative glass-card rounded-[3rem] p-6 shadow-glow">
+                    <!-- Image wrapper with gradient border -->
+                    <div class="relative rounded-[2.5rem] overflow-hidden">
+                        <!-- Gradient border effect -->
+                        <div class="absolute inset-0 bg-gradient-to-br from-violet-500 via-purple-500 to-pink-500 opacity-50 blur-sm"></div>
+                        
+                        <!-- Image -->
+                        <div class="relative bg-slate-900 rounded-[2.5rem] p-1">
+                            <img 
+                                src="images/profile.png" 
+                                alt="Anton Nageh - Front-end Developer"
+                                class="w-full h-full object-cover rounded-[2.3rem]"
+                                loading="eager"
+                            />
+                        </div>
+                    </div>
+                    
+                    <!-- Floating badges -->
+                    <div class="absolute -top-4 -right-4 glass-card px-4 py-3 rounded-2xl shadow-glow">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-code text-violet-400 text-xl"></i>
+                            <span class="font-semibold text-sm">Developer</span>
+                        </div>
+                    </div>
+                    
+                    <div class="absolute -bottom-4 -left-4 glass-card px-4 py-3 rounded-2xl shadow-glow">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-palette text-purple-400 text-xl"></i>
+                            <span class="font-semibold text-sm">Designer</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section bind:this={skillsRef} class="skills-section py-20 px-4 md:px-8 border-t border-violet-950/30">
+        <div class="w-full max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="section-title text-3xl md:text-4xl lg:text-5xl font-bold mb-3">
+                    Tech Stack
+                </h2>
+                <p class="text-gray-400 text-lg">Technologies I work with</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4 md:gap-6">
+                {#each skills as skill}
+                    <div class="skill-card glass-card p-6 rounded-xl hover:shadow-glow-hover transition-smooth cursor-pointer">
+                        <div class="flex flex-col items-center gap-3">
+                            <i class="{skill.icon} text-3xl md:text-4xl text-violet-400"></i>
+                            <span class="text-sm font-medium text-gray-300">{skill.name}</span>
+                        </div>
+                    </div>
+                {/each}
+            </div>
+        </div>
+    </section>
+
+    <!-- PINNED SCROLL SECTION - The Amazing Effect! -->
+    <section bind:this={pinnedSectionRef} class="relative h-screen overflow-hidden bg-slate-950 z-10">
+        <div class="absolute inset-0 flex items-center justify-center z-20">
+            {#each pinnedSlides as slide, i}
+                <div class="pinned-slide absolute inset-0 flex items-center justify-center px-4 md:px-8" style="opacity: {i === 0 ? 1 : 0}; z-index: {pinnedSlides.length - i};">
+                    <div class="w-full max-w-4xl mx-auto text-center">
+                        <div class="glass-card p-12 md:p-16 rounded-3xl shadow-glow">
+                            <!-- Icon -->
+                            <div class="w-24 h-24 mx-auto mb-8 bg-gradient-to-br {slide.color} rounded-3xl flex items-center justify-center shadow-glow">
+                                <i class="{slide.icon} text-5xl text-white"></i>
+                            </div>
+                            
+                            <!-- Title -->
+                            <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 gradient-text">
+                                {slide.title}
+                            </h2>
+                            
+                            <!-- Description -->
+                            <p class="text-xl md:text-2xl text-gray-300 leading-relaxed">
+                                {slide.description}
+                            </p>
+                            
+                            <!-- Progress indicator -->
+                            <div class="mt-12 flex justify-center gap-2">
+                                {#each pinnedSlides as _, idx}
+                                    <div class="w-2 h-2 rounded-full bg-gray-600 transition-all duration-300"></div>
+                                {/each}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             {/each}
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 px-4 md:px-8 border-t border-violet-950/30">
+        <div class="w-full max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="section-title text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+                    Featured Projects
+                </h2>
+                <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto">
+                    A selection of projects that showcase my skills in building modern, scalable web applications
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {#each projects as project, i}
+                    <div class="project-card">
+                        <Step {project} delay={i * 0.1} />
+                    </div>
+                {/each}
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4 md:px-8 border-t border-violet-950/30">
+        <div class="w-full max-w-5xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="section-title text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+                    About Me
+                </h2>
+                <p class="text-gray-400 text-lg md:text-xl">
+                    Passionate about building great software
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="about-card glass-card p-8 rounded-2xl hover:shadow-glow-hover transition-smooth">
+                    <div class="w-12 h-12 mb-4 bg-violet-600/20 rounded-xl flex items-center justify-center">
+                        <i class="fa-solid fa-code text-2xl text-violet-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Self-Taught Developer</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Committed to continuous learning and mastering modern web technologies through hands-on projects and best practices.
+                    </p>
+                </div>
+
+                <div class="about-card glass-card p-8 rounded-2xl hover:shadow-glow-hover transition-smooth">
+                    <div class="w-12 h-12 mb-4 bg-violet-600/20 rounded-xl flex items-center justify-center">
+                        <i class="fa-solid fa-palette text-2xl text-violet-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Design-Focused</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Strong eye for design and user experience. I create interfaces that are both beautiful and functional.
+                    </p>
+                </div>
+
+                <div class="about-card glass-card p-8 rounded-2xl hover:shadow-glow-hover transition-smooth">
+                    <div class="w-12 h-12 mb-4 bg-violet-600/20 rounded-xl flex items-center justify-center">
+                        <i class="fa-solid fa-comments text-2xl text-violet-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Clear Communicator</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Effective communication and collaboration skills. I translate complex technical concepts into clear solutions.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-20 px-4 md:px-8 border-t border-violet-950/30">
+        <div class="w-full max-w-4xl mx-auto text-center">
+            <div class="glass-card p-12 rounded-3xl shadow-glow">
+                <h2 class="section-title text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+                    Let's Work Together
+                </h2>
+                <p class="text-xl md:text-2xl text-gray-300 mb-10">
+                    I'm currently available for freelance projects and full-time opportunities.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a 
+                        href="https://www.linkedin.com/in/anton-nageh-772852169"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex items-center justify-center gap-2 px-8 py-4 btn-primary rounded-lg font-semibold cursor-pointer"
+                    >
+                        <i class="fa-brands fa-linkedin"></i>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a 
+                        href="mailto:anton.nageh20@gmail.com"
+                        class="inline-flex items-center justify-center gap-2 px-8 py-4 btn-secondary rounded-lg font-semibold cursor-pointer"
+                    >
+                        <i class="fa-solid fa-envelope"></i>
+                        <span>Email Me</span>
+                    </a>
+                    <a 
+                        href="https://github.com/AntonNageh"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex items-center justify-center gap-2 px-8 py-4 btn-secondary rounded-lg font-semibold cursor-pointer"
+                    >
+                        <i class="fa-brands fa-github"></i>
+                        <span>GitHub</span>
+                    </a>
+                </div>
+            </div>
         </div>
     </section>
 </main>

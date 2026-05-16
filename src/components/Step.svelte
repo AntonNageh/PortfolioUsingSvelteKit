@@ -1,20 +1,44 @@
 <script>
-    export let step;
+    export let project;
 </script>
 
-    <a href={step.href} target="_blank" class="p-4 sm:p-6 md:p-8 flex flex-col gap-4 rounded-lg
-    border border-solid border-violet-700 text-center group cursor-pointer hover:border-violet-400 duration-200">
-        <div class="bg-slate-950 grid place-items-center px-4 text-5xl md:text-6xl -mt-10 sm:-mt-12 md:-mt-14 lg:-mt-16 mx-auto
-        duration-200">
-            <i class={step.icon}></i>
+<article class="h-full">
+    <a 
+        href={project.href} 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="block h-full group"
+    >
+        <div class="h-full glass-card p-6 rounded-2xl hover:shadow-glow-hover transition-smooth cursor-pointer">
+            <!-- Icon -->
+            <div class="w-14 h-14 mb-4 bg-violet-600/20 rounded-xl flex items-center justify-center group-hover:bg-violet-600/30 transition-smooth group-hover:scale-110">
+                <i class="{project.icon} text-2xl text-violet-400"></i>
+            </div>
+            
+            <!-- Title -->
+            <h3 class="text-xl font-bold mb-3 group-hover:text-violet-400 transition-smooth">
+                {project.name}
+            </h3>
+            
+            <!-- Description -->
+            <p class="text-gray-400 leading-relaxed mb-4 text-sm">
+                {project.description}
+            </p>
+            
+            <!-- Tags -->
+            <div class="flex flex-wrap gap-2 mb-4">
+                {#each project.tags as tag}
+                    <span class="px-3 py-1 text-xs bg-violet-600/10 text-violet-300 rounded-full border border-violet-600/20">
+                        {tag}
+                    </span>
+                {/each}
+            </div>
+            
+            <!-- CTA -->
+            <div class="flex items-center gap-2 text-violet-400 font-medium text-sm group-hover:gap-3 transition-all">
+                <span>View Project</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </div>
         </div>
-    <h3 class="font-medium text-lg sm:text-xl md:text-2xl">{step.name}</h3>
-    <slot></slot>
-    <div class="flex-1 flex justify-between gap-4 items-center">
-        <div class="ml-auto mt-auto cursor-pointer hover:text-slate-950 duration-200 relative
-        after:absolute after:top-0 after:right-full after:w-full
-        after:h-full after:duration-300 after:rounded-full after:bg-white hover:after:translate-x-full after:z-[-1] overflow-hidden">
-        <p class="relative z-4 p-2">Go to &rarr;</p>
-        </div>
-    </div>
     </a>
+</article>

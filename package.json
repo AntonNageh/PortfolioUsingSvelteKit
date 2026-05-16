@@ -1,11 +1,13 @@
 {
-	"name": "my-project",
-	"version": "0.0.1",
+	"name": "anton-nageh-portfolio",
+	"version": "2.0.0",
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
-		"preview": "vite preview"
+		"preview": "vite preview",
+		"check": "svelte-check --tsconfig ./jsconfig.json",
+		"format": "prettier --write ."
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-vercel": "^6.2.0",
@@ -25,6 +27,7 @@
 	},
 	"dependencies": {
 		"@vercel/analytics": "^1.6.1",
-		"animate.css": "^4.1.1"
+		"gsap": "^3.12.5",
+		"framer-motion": "^11.0.0"
 	}
 }
