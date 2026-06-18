@@ -9,7 +9,6 @@
     let profileRef;
     let textRef;
     let skillsRef;
-    let pinnedSectionRef;
     
     // Only standout projects - no duplicates
     let projects = [
@@ -66,34 +65,6 @@
         { name: 'Three.js', icon: 'fa-solid fa-cube' },
         { name: 'Node.js', icon: 'fa-brands fa-node' },
         { name: 'PostgreSQL', icon: 'fa-solid fa-database' }
-    ];
-
-    // Pinned section content
-    let pinnedSlides = [
-        {
-            title: "Building Modern Web Apps",
-            description: "I specialize in creating fast, responsive, and accessible web applications using the latest technologies and best practices.",
-            icon: "fa-solid fa-rocket",
-            color: "from-violet-600 to-purple-600"
-        },
-        {
-            title: "Performance Matters",
-            description: "Every millisecond counts. I optimize for speed, ensuring your users get the best experience possible with lazy loading, code splitting, and efficient rendering.",
-            icon: "fa-solid fa-gauge-high",
-            color: "from-purple-600 to-pink-600"
-        },
-        {
-            title: "Design & User Experience",
-            description: "Beautiful interfaces that users love. I combine aesthetics with functionality to create intuitive, engaging experiences.",
-            icon: "fa-solid fa-palette",
-            color: "from-pink-600 to-rose-600"
-        },
-        {
-            title: "Clean, Maintainable Code",
-            description: "Writing code that's easy to understand and maintain. Following best practices, design patterns, and keeping things simple.",
-            icon: "fa-solid fa-code",
-            color: "from-blue-600 to-cyan-600"
-        }
     ];
 
     onMount(() => {
@@ -164,55 +135,6 @@
                         }
                     }
                 );
-            });
-
-            // PINNED SCROLL SECTION - The effect you want!
-            const slides = gsap.utils.toArray('.pinned-slide');
-            
-            // Create a timeline for the pinned section with more scroll space
-            const pinnedTimeline = gsap.timeline({
-                scrollTrigger: {
-                    trigger: pinnedSectionRef,
-                    start: 'top top',
-                    end: () => `+=${window.innerHeight * (slides.length + 1)}`, // Extra space for last slide
-                    pin: true,
-                    scrub: 1,
-                    anticipatePin: 1,
-                    pinSpacing: true
-                }
-            });
-
-            // Animate each slide in sequence
-            slides.forEach((slide, i) => {
-                if (i === 0) {
-                    // First slide starts visible
-                    pinnedTimeline.fromTo(slide,
-                        { opacity: 1, scale: 1, zIndex: slides.length - i },
-                        { opacity: 0, scale: 0.8, zIndex: slides.length - i, duration: 1 },
-                        0
-                    );
-                } else {
-                    // Subsequent slides fade in
-                    pinnedTimeline.fromTo(slide,
-                        { opacity: 0, scale: 1.2, zIndex: slides.length - i },
-                        { opacity: 1, scale: 1, zIndex: slides.length - i, duration: 0.5 },
-                        i - 0.5
-                    );
-                    
-                    // Then fade out (except last slide)
-                    if (i < slides.length - 1) {
-                        pinnedTimeline.to(slide,
-                            { opacity: 0, scale: 0.8, duration: 0.5 },
-                            i + 0.5
-                        );
-                    } else {
-                        // Last slide stays visible longer
-                        pinnedTimeline.to(slide,
-                            { opacity: 1, scale: 1, duration: 0.5 },
-                            i + 0.5
-                        );
-                    }
-                }
             });
 
             // Section titles parallax
@@ -372,41 +294,6 @@
                     </div>
                 {/each}
             </div>
-        </div>
-    </section>
-
-    <!-- PINNED SCROLL SECTION - The Amazing Effect! -->
-    <section bind:this={pinnedSectionRef} class="relative h-screen overflow-hidden bg-slate-950 z-10">
-        <div class="absolute inset-0 flex items-center justify-center z-20">
-            {#each pinnedSlides as slide, i}
-                <div class="pinned-slide absolute inset-0 flex items-center justify-center px-4 md:px-8" style="opacity: {i === 0 ? 1 : 0}; z-index: {pinnedSlides.length - i};">
-                    <div class="w-full max-w-4xl mx-auto text-center">
-                        <div class="glass-card p-12 md:p-16 rounded-3xl shadow-glow">
-                            <!-- Icon -->
-                            <div class="w-24 h-24 mx-auto mb-8 bg-gradient-to-br {slide.color} rounded-3xl flex items-center justify-center shadow-glow">
-                                <i class="{slide.icon} text-5xl text-white"></i>
-                            </div>
-                            
-                            <!-- Title -->
-                            <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 gradient-text">
-                                {slide.title}
-                            </h2>
-                            
-                            <!-- Description -->
-                            <p class="text-xl md:text-2xl text-gray-300 leading-relaxed">
-                                {slide.description}
-                            </p>
-                            
-                            <!-- Progress indicator -->
-                            <div class="mt-12 flex justify-center gap-2">
-                                {#each pinnedSlides as _, idx}
-                                    <div class="w-2 h-2 rounded-full bg-gray-600 transition-all duration-300"></div>
-                                {/each}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            {/each}
         </div>
     </section>
 
