@@ -1,6 +1,5 @@
 <script>
 import Step from '../components/Step.svelte';
-import 'animate.css'
 let videoHidden = true;
 let showButton = true;
 const handleButton = () =>{
